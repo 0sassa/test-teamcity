@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "tc-test": "ng test --single-run --reporters=teamcity",
+    "tc-test": "ng test –watch=false --reporters=teamcity",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
