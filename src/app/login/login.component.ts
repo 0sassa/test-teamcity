@@ -1,40 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {first} from "rxjs/operators";
-import {AuthenticationService} from "../service/auth.service";
+import {
+  Component,
+  EventEmitter,
+  Output
+} from '@angular/core';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
+
+export class User {
+constructor(public email: string,
+            public password: string) {
+}
+}
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+selector: 'app-login',
+template: `
+<form (ngSubmit)="login()"
+    [formGroup]="form">
+<label>Email</label>
+<input type="email"
+       formControlName="email">
+<label>Password</label>
+<input type="password"
+       formControlName="password">
+<button type="submit">Login</button>
+</form>
+`
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+@Output() loggedIn = new EventEmitter<User>();
+form: FormGroup;
 
-  loginForm: FormGroup;
-  submitted: boolean = false;
-  invalidLogin: boolean = false;
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService) { }
+constructor(private fb: FormBuilder) {
+}
 
-  onSubmit() {
-    this.submitted = true;
-    if (this.loginForm.invalid) {
-      return;
-    }
-    if(this.loginForm.controls.email.value == 'dhiraj@gmail.com' && this.loginForm.controls.password.value == 'password') {
-        this.router.navigate(['list-user']);
-    }else {
-      this.invalidLogin = true;
-    }
+ngOnInit() {
+  this.form = this.fb.group({
+    email: ['', [
+      Validators.required,
+      Validators.pattern('[^ @]*@[^ @]*')]],
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8)]],
+  });
+}
+
+login() {
+  console.log(`Login ${this.form.value}`);
+  if (this.form.valid) {
+    this.loggedIn.emit(
+        new User(
+            this.form.value.email,
+            this.form.value.password
+        )
+    );
   }
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-
-
+}
 }
