@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {User} from "../model/user.model";
+import {User} from '../model/user.model';
 
 @Injectable()
 export class UserService {
   constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8080/user-portal/users';
+  baseUrl = 'http://localhost:8080/user-portal/users';
 
   getUsers() {
     /* let fakeUsers = [{id: 1, firstName: 'Dhiraj', lastName: 'Ray', email: 'dhiraj@gmail.com'},

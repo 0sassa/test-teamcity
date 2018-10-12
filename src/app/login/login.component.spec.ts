@@ -1,7 +1,7 @@
 
 import {TestBed, ComponentFixture} from '@angular/core/testing';
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
-import {LoginComponent, User} from "./login.component";
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {LoginComponent, User} from './login.component';
 
 
 describe('Component: Login', () => {
@@ -31,7 +31,7 @@ describe('Component: Login', () => {
 
   it('email field validity', () => {
     let errors = {};
-    let email = component.form.controls['email'];
+    const email = component.form.controls['email'];
     expect(email.valid).toBeFalsy();
 
     // Email field is required
@@ -39,13 +39,13 @@ describe('Component: Login', () => {
     expect(errors['required']).toBeTruthy();
 
     // Set email to something
-    email.setValue("test");
+    email.setValue('test');
     errors = email.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['pattern']).toBeTruthy();
 
     // Set email to something correct
-    email.setValue("test@example.com");
+    email.setValue('test@example.com');
     errors = email.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['pattern']).toBeFalsy();
@@ -53,20 +53,20 @@ describe('Component: Login', () => {
 
   it('password field validity', () => {
     let errors = {};
-    let password = component.form.controls['password'];
+    const password = component.form.controls['password'];
 
     // Email field is required
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
 
     // Set email to something
-    password.setValue("123456");
+    password.setValue('123456');
     errors = password.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['minlength']).toBeTruthy();
 
     // Set email to something correct
-    password.setValue("123456789");
+    password.setValue('123456789');
     errors = password.errors || {};
     expect(errors['required']).toBeFalsy();
     expect(errors['minlength']).toBeFalsy();
@@ -74,8 +74,8 @@ describe('Component: Login', () => {
 
   it('submitting a form emits a user', () => {
     expect(component.form.valid).toBeFalsy();
-    component.form.controls['email'].setValue("test@test.com");
-    component.form.controls['password'].setValue("123456789");
+    component.form.controls['email'].setValue('test@test.com');
+    component.form.controls['password'].setValue('123456789');
     expect(component.form.valid).toBeTruthy();
 
     let user: User;
@@ -86,8 +86,8 @@ describe('Component: Login', () => {
     component.login();
 
     // Now we can check to make sure the emitted value is correct
-    expect(user.email).toBe("test@test.com");
-    expect(user.password).toBe("123456789");
+    expect(user.email).toBe('test@test.com');
+    expect(user.password).toBe('123456789');
   });
 })
 ;

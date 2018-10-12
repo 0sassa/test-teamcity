@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
-import {UserService} from "../service/user.service";
-import {first} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {UserService} from '../service/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -11,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AddUserComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private router: Router, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
 
   addForm: FormGroup;
 

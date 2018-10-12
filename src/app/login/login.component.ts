@@ -37,6 +37,7 @@ form: FormGroup;
 constructor(private fb: FormBuilder) {
 }
 
+// tslint:disable-next-line:use-life-cycle-interface
 ngOnInit() {
   this.form = this.fb.group({
     email: ['', [
