@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
     "tc-test": "ng test --watch=false --reporters=teamcity",
     "test": "ng test",
     "lint": "ng lint",
